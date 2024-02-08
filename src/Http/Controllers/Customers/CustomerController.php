@@ -32,4 +32,14 @@ class CustomerController extends Controller
         $customer = $this->_customerService->deleteCustomer($id);
         return response(['status' => $customer->status, 'code' => $customer->code, 'message' => $customer->message, 'result' => $customer->result ?? NULL], $customer->code);
     }
+    public function readCustomerByReference(Request $request)
+    {
+        $customer = $this->_customerService->readCustomerByReference($request);
+        return response(['status' => $customer->status, 'code' => $customer->code, 'message' => $customer->message, 'result' => $customer->result ?? NULL], $customer->code);
+    }
+    public function listCustomerSubscription(int $id)
+    {
+        $customer = $this->_customerService->listCustomerSubscription($id);
+        return response(['status' => $customer->status, 'code' => $customer->code, 'message' => $customer->message, 'result' => $customer->result ?? NULL], $customer->code);
+    }
 }
