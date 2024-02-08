@@ -7,6 +7,360 @@
 	},
 	"item": [
 		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Wade",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Wilson",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "wade.wilson@example.com",
+									"type": "text"
+								},
+								{
+									"key": "organization",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "zip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "reference",
+									"value": "man",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/customer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productHandle",
+									"value": "self-guided-12-2",
+									"type": "text"
+								},
+								{
+									"key": "customerFirstName",
+									"value": "Patrick",
+									"type": "text"
+								},
+								{
+									"key": "customerLastName",
+									"value": "Brewer",
+									"type": "text"
+								},
+								{
+									"key": "customerEmail",
+									"value": "patrick.brewer@example.com",
+									"type": "text"
+								},
+								{
+									"key": "customerZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "customerState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "customerCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "customerCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "customerAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								},
+								{
+									"key": "fullNumber",
+									"value": "4111111111111111",
+									"type": "text"
+								},
+								{
+									"key": "expirationMonth",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "expirationYear",
+									"value": "27",
+									"type": "text"
+								},
+								{
+									"key": "billingZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "billingState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "billingCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "billingCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "billingAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/customer?page=1&per_page=10&q=Wade",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "q",
+									"value": "Wade"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/customer/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "75206568"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Wade\",\n    \"last_name\": \"Wilson\",\n    \"email\": \"wade.wilson@example.com\",\n    \"organization\": null,\n    \"zip\": \"2003\",\n    \"state\": \"NSW\",\n    \"country\": \"AU\",\n    \"city\": \"Emerald\",\n    \"address\": \"29 Sweeney Street\",\n    \"phone\": null,\n    \"reference\": \"man\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/customer/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "75206214"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/customer/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "75206439"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Customer by Reference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/customer/lookup?reference=man",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer",
+								"lookup"
+							],
+							"query": [
+								{
+									"key": "reference",
+									"value": "man"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Customer Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/customer/:id/subscriptions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"customer",
+								":id",
+								"subscriptions"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "75202514"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Subscriptions",
 			"item": [
 				{
@@ -125,7 +479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"full_number\": \"4111111111111111\",\n    \"expiration_month\": \"11\",\n    \"expiration_year\": \"2030\"\n}",
+							"raw": "{\n    \"full_number\": \"4111111111111119\",\n    \"expiration_month\": \"11\",\n    \"expiration_year\": \"2030\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,7 +500,7 @@
 							"variable": [
 								{
 									"key": "subscriptionID",
-									"value": "72137630"
+									"value": "72141360"
 								}
 							]
 						}
@@ -172,7 +526,7 @@
 							"variable": [
 								{
 									"key": "subscriptionID",
-									"value": "72137630"
+									"value": "72141360"
 								}
 							]
 						}
