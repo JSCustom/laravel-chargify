@@ -217,8 +217,8 @@ class CustomerService
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
-                'message' => 'Customer updated.',
-                'result' => $customer->customer
+                'message' => 'Customer deleted.',
+                'result' => $customer
             ];
         } catch (Exception $e) {
             return (object)[
@@ -241,12 +241,12 @@ class CustomerService
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
             }
-            $customer = collect((object)$customer)->pluck('customer');
+            $customer = collect((object)$customer);
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Customer details.',
-                'result' => $customer
+                'result' => $customer['customer']
             ];
         } catch (Exception $e) {
             return (object)[

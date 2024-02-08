@@ -10,9 +10,9 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::post('', [CustomerController::class, 'createCustomer']);
         Route::get('', [CustomerController::class, 'listCustomer']);
         Route::put('{id}', [CustomerController::class, 'updateCustomer']);
+        Route::get('lookup', [CustomerController::class, 'readCustomerByReference']);
         Route::get('{id}', [CustomerController::class, 'readCustomer']);
         Route::delete('{id}', [CustomerController::class, 'deleteCustomer']);
-        Route::get('lookup', [CustomerController::class, 'readCustomerByReference']);
         Route::get('{id}/subscriptions', [CustomerController::class, 'listCustomerSubscription']);
     });
     Route::group(['prefix' => 'subscription'], function() {
