@@ -21,7 +21,7 @@
       "email": "developer.jeddsaliba@gmail.com"
     }
   ],
-  "minimum-stability": "beta",
+  "minimum-stability": "stable",
   "extra": {
     "laravel": {
       "providers": [
