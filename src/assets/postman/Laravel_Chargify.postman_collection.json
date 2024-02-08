@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "31fc57d4-2627-4b88-8d32-702abb0d305d",
+		"name": "Laravel Chargify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5428104"
+	},
+	"item": [
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "Create Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_handle",
+									"value": "self-guided-12-2",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Patrick",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Brewer",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "patrick.brewer@example.com",
+									"type": "text"
+								},
+								{
+									"key": "zip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								},
+								{
+									"key": "full_number",
+									"value": "4111111111111111",
+									"type": "text"
+								},
+								{
+									"key": "expiration_month",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "expiration_year",
+									"value": "2027",
+									"type": "text"
+								},
+								{
+									"key": "billing_zip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "billing_state",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "billing_country",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "billing_city",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "billing_address",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/subscription",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_number\": \"4111111111111111\",\n    \"expiration_month\": \"11\",\n    \"expiration_year\": \"2030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/subscription/:subscriptionID",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"subscription",
+								":subscriptionID"
+							],
+							"variable": [
+								{
+									"key": "subscriptionID",
+									"value": "72137630"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Subscription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/subscription/:subscriptionID",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"subscription",
+								":subscriptionID"
+							],
+							"variable": [
+								{
+									"key": "subscriptionID",
+									"value": "72137630"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Subscriptions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productHandle",
+									"value": "self-guided-12-2",
+									"type": "text"
+								},
+								{
+									"key": "customerFirstName",
+									"value": "Patrick",
+									"type": "text"
+								},
+								{
+									"key": "customerLastName",
+									"value": "Brewer",
+									"type": "text"
+								},
+								{
+									"key": "customerEmail",
+									"value": "patrick.brewer@example.com",
+									"type": "text"
+								},
+								{
+									"key": "customerZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "customerState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "customerCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "customerCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "customerAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								},
+								{
+									"key": "fullNumber",
+									"value": "4111111111111111",
+									"type": "text"
+								},
+								{
+									"key": "expirationMonth",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "expirationYear",
+									"value": "27",
+									"type": "text"
+								},
+								{
+									"key": "billingZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "billingState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "billingCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "billingCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "billingAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/subscription?page=1&per_page=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"subscription"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
