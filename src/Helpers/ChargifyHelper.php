@@ -2,8 +2,8 @@
 
 namespace JSCustom\Chargify\Helpers;
 
-define('CHARGIFY_BASE_API' , env('CHARGIFY_BASE_API_URL'));
-define('CHARGIFY_API' , env('CHARGIFY_API_KEY'));
+define('CHARGIFY_BASE_API', env('CHARGIFY_BASE_API_URL'));
+define('CHARGIFY_API', env('CHARGIFY_API_KEY'));
 
 class ChargifyHelper
 {
@@ -12,8 +12,7 @@ class ChargifyHelper
         'key' => CHARGIFY_API,
         'password' => 'X',
     ];
-
-    public static function get($url, $data = null)
+    public static function get(String $url)
     {
         $curl = curl_init();
 
@@ -42,8 +41,7 @@ class ChargifyHelper
             return $response;
         }
     }
-
-    public static function post($url, $data, $method = 'POST')
+    public static function post(String $url, array $data, String $method = 'POST')
     {
         $curl = curl_init();
 
@@ -64,7 +62,7 @@ class ChargifyHelper
 
         $response = curl_exec($curl);
         $err = curl_error($curl);
-        
+
         curl_close($curl);
 
         if ($err) {
@@ -73,13 +71,12 @@ class ChargifyHelper
             return $response;
         }
     }
-    public static function put($url, $data)
+    public static function put(String $url, array $data)
     {
         return self::post($url, $data, 'PUT');
     }
-    public static function delete($url, $data = [])
+    public static function delete(String $url, array $data = [])
     {
-        return self::post($url, $data, 'DELETE');   
+        return self::post($url, $data, 'DELETE');
     }
 }
-?>
