@@ -5,7 +5,7 @@ namespace JSCustom\Chargify\Http\Controllers\Subscriptions;
 use JSCustom\Chargify\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ChargifySubscriptionController extends Controller
+class SubscriptionController extends Controller
 {
     public function createSubscription(Request $request)
     {

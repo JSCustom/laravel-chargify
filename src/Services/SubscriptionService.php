@@ -197,7 +197,7 @@ class SubscriptionService
     }
   }
   /**
-   * Update Subscription
+   * Read Subscription
    * Reference: https://developers.maxio.com/docs/api-docs/8cff5c3170d4b-read-subscription
    */
   public function readSubscription(int $subscriptionID)
