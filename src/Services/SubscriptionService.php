@@ -77,6 +77,9 @@ class SubscriptionService
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
       }
+      if (isset($subscription->error)) {
+        throw new Exception($subscription->error);
+      }
       ChargifyCustomer::create([
         'customer_id' => $subscription->subscription->customer->id,
         'first_name' => $subscription->subscription->customer->first_name,
