@@ -8,6 +8,7 @@ use JSCustom\Chargify\Models\{
   ChargifyProduct,
   ChargifySubscription
 };
+use JSCustom\Chargify\Providers\HttpServiceProvider;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -111,14 +112,14 @@ class SubscriptionService
       ]);
       return (object)[
         'status' => true,
-        'code' => 201,
+        'code' => HttpServiceProvider::CREATED,
         'message' => 'Subscription created.',
         'result' => $subscription->subscription
       ];
     } catch (Exception $e) {
       return (object)[
         'status' => false,
-        'code' => 400,
+        'code' => HttpServiceProvider::BAD_REQUEST,
         'message' => $e->getMessage()
       ];
     }
@@ -139,14 +140,14 @@ class SubscriptionService
       $subscription = collect((object)$subscription)->pluck('subscription');
       return (object)[
         'status' => true,
-        'code' => 200,
+        'code' => HttpServiceProvider::OK,
         'message' => 'Subscription list.',
         'result' => $subscription
       ];
     } catch (Exception $e) {
       return (object)[
         'status' => false,
-        'code' => 400,
+        'code' => HttpServiceProvider::BAD_REQUEST,
         'message' => $e->getMessage()
       ];
     }
@@ -174,20 +175,23 @@ class SubscriptionService
       ];
       $subscription = ChargifyHelper::put("/subscriptions/$subscriptionID.json", $data);
       $subscription = json_decode($subscription);
+      if (!$subscription) {
+        throw new Exception('Something went wrong. Please try again.');
+      }
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
       }
       $subscription = collect((object)$subscription);
       return (object)[
         'status' => true,
-        'code' => 200,
+        'code' => HttpServiceProvider::OK,
         'message' => 'Subscription updated.',
         'result' => $subscription['subscription']
       ];
     } catch (Exception $e) {
       return (object)[
         'status' => false,
-        'code' => 400,
+        'code' => HttpServiceProvider::BAD_REQUEST,
         'message' => $e->getMessage()
       ];
     }
@@ -207,14 +211,14 @@ class SubscriptionService
       $subscription = collect((object)$subscription);
       return (object)[
         'status' => true,
-        'code' => 200,
+        'code' => HttpServiceProvider::OK,
         'message' => 'Subscription details.',
         'result' => $subscription['subscription']
       ];
     } catch (Exception $e) {
       return (object)[
         'status' => false,
-        'code' => 400,
+        'code' => HttpServiceProvider::BAD_REQUEST,
         'message' => $e->getMessage()
       ];
     }
