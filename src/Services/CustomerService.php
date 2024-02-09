@@ -7,6 +7,7 @@ use JSCustom\Chargify\Models\{
     ChargifyCustomer
 };
 use JSCustom\Chargify\Providers\HttpServiceProvider;
+use JSCustom\Chargify\Utils\Urls;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -40,7 +41,7 @@ class CustomerService
                     "address_2" => $request->address_2
                 ]
             ];
-            $customer = ChargifyHelper::post('/customers.json', $data);
+            $customer = ChargifyHelper::post("/".Urls::CUSTOMERS.".json", $data);
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -84,7 +85,7 @@ class CustomerService
     {
         try {
             $params = http_build_query($request->all(), '', '&');
-            $customer = ChargifyHelper::get("/customers.json?$params");
+            $customer = ChargifyHelper::get("/".Urls::CUSTOMERS.".json?$params");
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -111,7 +112,7 @@ class CustomerService
     public function readCustomer(int $id)
     {
         try {
-            $customer = ChargifyHelper::get("/customers/$id.json");
+            $customer = ChargifyHelper::get("/".Urls::CUSTOMERS."/$id.json");
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -159,7 +160,7 @@ class CustomerService
                     "address_2" => $request->address_2
                 ]
             ];
-            $customer = ChargifyHelper::put("/customers/$id.json", $data);
+            $customer = ChargifyHelper::put("/".Urls::CUSTOMERS."/$id.json", $data);
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -203,7 +204,7 @@ class CustomerService
     public function deleteCustomer(int $id)
     {
         try {
-            $customer = ChargifyHelper::delete("/customers/$id.json");
+            $customer = ChargifyHelper::delete("/".Urls::CUSTOMERS."/$id.json");
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -236,7 +237,7 @@ class CustomerService
     {
         try {
             $params = http_build_query($request->all(), '', '&');
-            $customer = ChargifyHelper::get("/customers/lookup.json?$params");
+            $customer = ChargifyHelper::get("/".Urls::CUSTOMERS."/lookup.json?$params");
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -263,7 +264,7 @@ class CustomerService
     public function listCustomerSubscription(int $id)
     {
         try {
-            $customer = ChargifyHelper::get("/customers/$id/subscriptions.json");
+            $customer = ChargifyHelper::get("/".Urls::CUSTOMERS."/$id/".Urls::SUBSCRIPTIONS.".json");
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));

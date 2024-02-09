@@ -9,6 +9,7 @@ use JSCustom\Chargify\Models\{
   ChargifySubscription
 };
 use JSCustom\Chargify\Providers\HttpServiceProvider;
+use JSCustom\Chargify\Utils\Urls;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -73,7 +74,7 @@ class SubscriptionService
           ]
         ]
       ];
-      $subscription = ChargifyHelper::post('/subscriptions.json', $data);
+      $subscription = ChargifyHelper::post("/".Urls::SUBSCRIPTIONS.".json", $data);
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
@@ -132,7 +133,7 @@ class SubscriptionService
   {
     try {
       $params = http_build_query($request->all(),'','&');
-      $subscription = ChargifyHelper::get("/subscriptions.json?$params");
+      $subscription = ChargifyHelper::get("/".Urls::SUBSCRIPTIONS.".json?$params");
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
@@ -173,7 +174,7 @@ class SubscriptionService
           ]
         ]
       ];
-      $subscription = ChargifyHelper::put("/subscriptions/$subscriptionID.json", $data);
+      $subscription = ChargifyHelper::put("/".Urls::SUBSCRIPTIONS."/$subscriptionID.json", $data);
       $subscription = json_decode($subscription);
       if (!$subscription) {
         throw new Exception('Something went wrong. Please try again.');
@@ -203,7 +204,7 @@ class SubscriptionService
   public function readSubscription(int $subscriptionID)
   {
     try {
-      $subscription = ChargifyHelper::get("/subscriptions/$subscriptionID.json");
+      $subscription = ChargifyHelper::get("/".Urls::SUBSCRIPTIONS."/$subscriptionID.json");
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
