@@ -268,12 +268,12 @@ class CustomerService
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
             }
-            $customer = collect((object)$customer);
+            $customer = collect((object)$customer)->pluck('subscription');
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Customer subscriptions.',
-                'result' => $customer['customer']
+                'result' => $customer
             ];
         } catch (Exception $e) {
             return (object)[
