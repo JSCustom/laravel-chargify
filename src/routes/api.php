@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use JSCustom\Chargify\Http\Controllers\{
     Customers\CustomerController,
+    ProductPricePoint\ProductPricePointController,
     Subscriptions\SubscriptionController,
     Sync\SyncController
 };
