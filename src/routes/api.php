@@ -27,6 +27,7 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::get('', [ProductFamilyController::class, 'listProductFamily']);
         Route::put('{id}', [ProductFamilyController::class, 'updateProductFamily']);
         Route::get('{id}', [ProductFamilyController::class, 'readProductFamily']);
+        Route::delete('{id}', [ProductFamilyController::class, 'deleteProductFamily']);
     });
     Route::group(['prefix' => 'subscription'], function() {
         Route::post('', [SubscriptionController::class, 'createSubscription']);

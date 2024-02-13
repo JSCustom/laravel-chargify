@@ -148,4 +148,32 @@ class ProductFamilyService
             ];
         }
     }
+    public function deleteProductFamily(int $id)
+    {
+        try {
+            $productFamily = ChargifyHelper::delete("/".Urls::PRODUCT_FAMILIES."/$id.json");
+            $productFamily = json_decode($productFamily);
+            if (isset($productFamily->errors)) {
+                throw new Exception(implode(' ', $productFamily->errors));
+            }
+            if (isset($productFamily->error)) {
+                throw new Exception($productFamily->error);
+            }
+            ProductFamily::where([
+                'product_family_id' => $id
+            ])->delete();
+            return (object)[
+                'status' => true,
+                'code' => HttpServiceProvider::OK,
+                'message' => 'Product family deleted.',
+                'result' => $productFamily
+            ];
+        } catch (Exception $e) {
+            return (object)[
+                'status' => false,
+                'code' => HttpServiceProvider::BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
 }

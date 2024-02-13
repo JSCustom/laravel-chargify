@@ -12,19 +12,24 @@ class ProductFamilyController extends Controller
         $productFamily = $this->_productFamilyService->createProductFamily($request);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
-    public function readProduct(int $id)
+    public function readProductFamily(int $id)
     {
         $productFamily = $this->_productFamilyService->readProductFamily($id);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
-    public function updateProduct(Request $request, int $id)
+    public function updateProductFamily(Request $request, int $id)
     {
         $productFamily = $this->_productFamilyService->updateProductFamily($request, $id);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
-    public function listProduct(Request $request)
+    public function listProductFamily(Request $request)
     {
         $productFamily = $this->_productFamilyService->listProductFamily($request);
+        return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
+    }
+    public function deleteProductFamily(int $id)
+    {
+        $productFamily = $this->_productFamilyService->deleteProductFamily($id);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
 }
