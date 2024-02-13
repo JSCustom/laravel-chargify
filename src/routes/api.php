@@ -6,6 +6,7 @@ use JSCustom\Chargify\Http\Controllers\{
     Subscriptions\SubscriptionController,
     Sync\SyncController
 };
+use JSCustom\Chargify\Http\Controllers\ProductFamilies\ProductFamilyController;
 
 Route::group(['prefix' => 'chargify'], function() {
     Route::group(['prefix' => 'sync'], function() {
@@ -20,6 +21,12 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::get('{id}', [CustomerController::class, 'readCustomer']);
         Route::delete('{id}', [CustomerController::class, 'deleteCustomer']);
         Route::get('{id}/subscriptions', [CustomerController::class, 'listCustomerSubscription']);
+    });
+    Route::group(['prefix' => 'product-family'], function() {
+        Route::post('', [ProductFamilyController::class, 'createProductFamily']);
+        Route::get('', [ProductFamilyController::class, 'listProductFamily']);
+        Route::put('{id}', [ProductFamilyController::class, 'updateProductFamily']);
+        Route::get('{id}', [ProductFamilyController::class, 'readProductFamily']);
     });
     Route::group(['prefix' => 'subscription'], function() {
         Route::post('', [SubscriptionController::class, 'createSubscription']);

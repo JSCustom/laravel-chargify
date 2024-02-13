@@ -4,7 +4,7 @@ namespace JSCustom\Chargify\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChargifySubscription extends Model
+class Subscription extends Model
 {
     protected $fillable = [
         'subscription_id',

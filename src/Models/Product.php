@@ -4,7 +4,7 @@ namespace JSCustom\Chargify\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChargifyProduct extends Model
+class Product extends Model
 {
     protected $fillable = [
         'product_id',
@@ -14,6 +14,7 @@ class ChargifyProduct extends Model
         'interval',
         'interval_unit',
         'tax_code',
+        'default_product_price_point_id',
         'product_price_point_id'
     ];
 
@@ -26,6 +27,7 @@ class ChargifyProduct extends Model
         'interval' => 'integer',
         'interval_unit' => 'string',
         'tax_code' => 'string',
+        'default_product_price_point_id' => 'integer',
         'product_price_point_id' => 'integer'
     ];
 }

@@ -4,7 +4,7 @@ namespace JSCustom\Chargify\Services;
 
 use JSCustom\Chargify\Helpers\ChargifyHelper;
 use JSCustom\Chargify\Models\{
-    ChargifyCustomer
+    Customer
 };
 use JSCustom\Chargify\Providers\HttpServiceProvider;
 use JSCustom\Chargify\Utils\Urls;
@@ -49,7 +49,7 @@ class CustomerService
             if (isset($customer->error)) {
                 throw new Exception($customer->error);
             }
-            ChargifyCustomer::create([
+            Customer::create([
                 'customer_id' => $customer->customer->id,
                 'first_name' => $customer->customer->first_name,
                 'last_name' => $customer->customer->last_name,
@@ -168,7 +168,7 @@ class CustomerService
             if (isset($customer->error)) {
                 throw new Exception($customer->error);
             }
-            ChargifyCustomer::where([
+            Customer::where([
                 'customer_id' => $id
             ])->update([
                 'first_name' => $customer->customer->first_name,
@@ -212,7 +212,7 @@ class CustomerService
             if (isset($customer->error)) {
                 throw new Exception($customer->error);
             }
-            ChargifyCustomer::where([
+            Customer::where([
                 'customer_id' => $id
             ])->delete();
             return (object)[

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChargifyProductsTable extends Migration
+class CreateChargifyProductFamiliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,13 @@ class CreateChargifyProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chargify_products', function (Blueprint $table) {
+        Schema::create('chargify_product_families', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_family_id');
             $table->char('name', 100);
-            $table->char('handle', 100);
             $table->text('description');
-            $table->text('accounting_code');
-            $table->boolean('require_credit_card')->default(true);
-            $table->integer('price_in_cents');
-            $table->integer('interval')->default(1);
-            $table->char('interval_unit', 100);
-            $table->boolean('auto_create_signup_page')->default(true);
-            $table->char('tax_code', 100);
+            $table->char('handle', 100);
+            $table->char('accounting_code', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

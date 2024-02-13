@@ -4,9 +4,8 @@ namespace JSCustom\Chargify\Services;
 
 use JSCustom\Chargify\Helpers\ChargifyHelper;
 use JSCustom\Chargify\Models\{
-  ChargifyCustomer,
-  ChargifyProduct,
-  ChargifySubscription
+  Customer,
+  Subscription
 };
 use JSCustom\Chargify\Providers\HttpServiceProvider;
 use JSCustom\Chargify\Utils\Urls;
@@ -74,7 +73,7 @@ class SubscriptionService
           ]
         ]
       ];
-      $subscription = ChargifyHelper::post("/".Urls::SUBSCRIPTIONS.".json", $data);
+      $subscription = ChargifyHelper::post("/" . Urls::SUBSCRIPTIONS . ".json", $data);
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
@@ -82,35 +81,35 @@ class SubscriptionService
       if (isset($subscription->error)) {
         throw new Exception($subscription->error);
       }
-      ChargifyCustomer::create([
-        'customer_id' => $subscription->subscription->customer->id,
-        'first_name' => $subscription->subscription->customer->first_name,
-        'last_name' => $subscription->subscription->customer->last_name,
-        'organization' => $subscription->subscription->customer->organization,
-        'email' => $subscription->subscription->customer->email,
-        'address' => $subscription->subscription->customer->address,
-        'address_2' => $subscription->subscription->customer->address_2,
-        'city' => $subscription->subscription->customer->city,
-        'state' => $subscription->subscription->customer->state,
-        'zip' => $subscription->subscription->customer->zip,
-        'country' => $subscription->subscription->customer->country,
-        'phone' => $subscription->subscription->customer->phone
-      ]);
-      ChargifyProduct::create([
-        'product_id' => $subscription->subscription->product->id,
-        'name' => $subscription->subscription->product->name,
-        'handle' => $subscription->subscription->product->handle,
-        'description' => $subscription->subscription->product->description,
-        'interval' => $subscription->subscription->product->interval,
-        'interval_unit' => $subscription->subscription->product->interval_unit,
-        'tax_code' => $subscription->subscription->product->tax_code,
-        'product_price_point_id' => $subscription->subscription->product->product_price_point_id
-      ]);
-      ChargifySubscription::create([
-        'subscription_id' => $subscription->subscription->id,
-        'customer_id' => $subscription->subscription->customer->id,
-        'product_id' => $subscription->subscription->product->id
-      ]);
+      Customer::updateOrCreate(
+        [
+          'customer_id' => $subscription->subscription->customer->id
+        ],
+        [
+          'customer_id' => $subscription->subscription->customer->id,
+          'first_name' => $subscription->subscription->customer->first_name,
+          'last_name' => $subscription->subscription->customer->last_name,
+          'organization' => $subscription->subscription->customer->organization,
+          'email' => $subscription->subscription->customer->email,
+          'address' => $subscription->subscription->customer->address,
+          'address_2' => $subscription->subscription->customer->address_2,
+          'city' => $subscription->subscription->customer->city,
+          'state' => $subscription->subscription->customer->state,
+          'zip' => $subscription->subscription->customer->zip,
+          'country' => $subscription->subscription->customer->country,
+          'phone' => $subscription->subscription->customer->phone
+        ]
+      );
+      Subscription::updateOrCreate(
+        [
+          'subscription_id' => $subscription->subscription->id
+        ],
+        [
+          'subscription_id' => $subscription->subscription->id,
+          'customer_id' => $subscription->subscription->customer->id,
+          'product_id' => $subscription->subscription->product->id
+        ]
+      );
       return (object)[
         'status' => true,
         'code' => HttpServiceProvider::CREATED,
@@ -132,8 +131,8 @@ class SubscriptionService
   public function listSubscription(Request $request)
   {
     try {
-      $params = http_build_query($request->all(),'','&');
-      $subscription = ChargifyHelper::get("/".Urls::SUBSCRIPTIONS.".json?$params");
+      $params = http_build_query($request->all(), '', '&');
+      $subscription = ChargifyHelper::get("/" . Urls::SUBSCRIPTIONS . ".json?$params");
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
@@ -174,7 +173,7 @@ class SubscriptionService
           ]
         ]
       ];
-      $subscription = ChargifyHelper::put("/".Urls::SUBSCRIPTIONS."/$subscriptionID.json", $data);
+      $subscription = ChargifyHelper::put("/" . Urls::SUBSCRIPTIONS . "/$subscriptionID.json", $data);
       $subscription = json_decode($subscription);
       if (!$subscription) {
         throw new Exception('Something went wrong. Please try again.');
@@ -204,7 +203,7 @@ class SubscriptionService
   public function readSubscription(int $subscriptionID)
   {
     try {
-      $subscription = ChargifyHelper::get("/".Urls::SUBSCRIPTIONS."/$subscriptionID.json");
+      $subscription = ChargifyHelper::get("/" . Urls::SUBSCRIPTIONS . "/$subscriptionID.json");
       $subscription = json_decode($subscription);
       if (isset($subscription->errors)) {
         throw new Exception(implode(' ', $subscription->errors));
@@ -225,4 +224,3 @@ class SubscriptionService
     }
   }
 }
-?>
