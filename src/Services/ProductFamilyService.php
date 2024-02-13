@@ -45,7 +45,7 @@ class ProductFamilyService
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product family created.',
-                'result' => null
+                'result' => $productFamily->product_family
             ];
         } catch (Exception $e) {
             return (object)[
