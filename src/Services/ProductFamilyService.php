@@ -176,4 +176,28 @@ class ProductFamilyService
             ];
         }
     }
+    public function listProductsForProductFamily(Request $request, int $id)
+    {
+        try {
+            $params = http_build_query($request->all(), '', '&');
+            $productFamily = ChargifyHelper::get("/".Urls::PRODUCT_FAMILIES."/$id/products.json?$params");
+            $productFamily = json_decode($productFamily);
+            if (isset($productFamily->errors)) {
+                throw new Exception(implode(' ', $productFamily->errors));
+            }
+            $productFamily = collect((object)$productFamily)->pluck('product_family');
+            return (object)[
+                'status' => true,
+                'code' => HttpServiceProvider::OK,
+                'message' => 'Product family product list.',
+                'result' => $productFamily
+            ];
+        } catch (Exception $e) {
+            return (object)[
+                'status' => false,
+                'code' => HttpServiceProvider::BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
 }

@@ -32,4 +32,9 @@ class ProductFamilyController extends Controller
         $productFamily = $this->_productFamilyService->deleteProductFamily($id);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
+    public function listProductsForProductFamily(Request $request, int $id)
+    {
+        $productFamily = $this->_productFamilyService->listProductsForProductFamily($request, $id);
+        return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
+    }
 }
