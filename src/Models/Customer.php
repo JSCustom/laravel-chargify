@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $table = 'chargify_customers';
+
     protected $fillable = [
         'customer_id',
         'first_name',

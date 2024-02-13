@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductFamily extends Model
 {
+    protected $table = 'chargify_product_families';
+
     protected $fillable = [
         'product_family_id',
         'name',
