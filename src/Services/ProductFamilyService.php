@@ -166,7 +166,7 @@ class ProductFamilyService
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product family deleted.',
-                'result' => $productFamily
+                'result' => $productFamily->product_family
             ];
         } catch (Exception $e) {
             return (object)[
