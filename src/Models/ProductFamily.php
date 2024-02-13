@@ -2,10 +2,15 @@
 
 namespace JSCustom\Chargify\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Model,
+    SoftDeletes
+};
 
 class ProductFamily extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'chargify_product_families';
 
     protected $fillable = [
