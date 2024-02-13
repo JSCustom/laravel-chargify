@@ -38,6 +38,7 @@ class ChargifyServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../database/migrations/create_chargify_customers_table.php' => database_path('migrations/chargify/' . date('Y_m_d_His', time()) . '_create_chargify_customers_table.php'),
+            __DIR__ . '/../database/migrations/create_chargify_product_families_table.php' => database_path('migrations/chargify/' . date('Y_m_d_His', time()) . '_create_chargify_product_families_table.php'),
             __DIR__ . '/../database/migrations/create_chargify_products_table.php' => database_path('migrations/chargify/' . date('Y_m_d_His', time()) . '_create_chargify_products_table.php'),
             __DIR__ . '/../database/migrations/create_chargify_subscriptions_table.php' => database_path('migrations/chargify/' . date('Y_m_d_His', time()) . '_create_chargify_subscriptions_table.php')
         ], 'migrations');
