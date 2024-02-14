@@ -127,55 +127,6 @@ class ProductService
             ];
         }
     }
-    public function unarchiveProduct(Request $request, int $id)
-    {
-        try {
-            $request->validate([
-                'handle' => 'required'
-            ]);
-            $data = [
-                "product" => [
-                    "handle" => $request->handle
-                ]
-            ];
-            $product = ChargifyHelper::post("/" . Urls::PRODUCTS . "/$id/undestroy.json", $data);
-            $product = json_decode($product);
-            if (isset($product->errors)) {
-                throw new Exception(implode(' ', $product->errors));
-            }
-            if (isset($product->error)) {
-                throw new Exception($product->error);
-            }
-            Product::updateOrCreate([
-                'product_id' => $product->product->id
-            ], [
-                'product_id' => $product->product->id,
-                'product_family_id' => $product->product->product_family->id,
-                'name' => $product->product->name,
-                'handle' => $product->product->handle,
-                'description' => $product->product->description,
-                'accounting_code' => $product->product->accounting_code,
-                'require_credit_card' => $product->product->require_credit_card,
-                'price_in_cents' => $product->product->price_in_cents,
-                'interval' => $product->product->interval,
-                'interval_unit' => $product->product->interval_unit,
-                'auto_create_signup_page' => $request->auto_create_signup_page ?? true,
-                'tax_code' => $product->product->tax_code
-            ]);
-            return (object)[
-                'status' => true,
-                'code' => HttpServiceProvider::OK,
-                'message' => 'Product unarchived.',
-                'result' => $product->product
-            ];
-        } catch (Exception $e) {
-            return (object)[
-                'status' => false,
-                'code' => HttpServiceProvider::BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-    }
     public function readProductByHandle(String $handle)
     {
         try {
