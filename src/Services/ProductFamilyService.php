@@ -185,7 +185,7 @@ class ProductFamilyService
             if (isset($productFamily->errors)) {
                 throw new Exception(implode(' ', $productFamily->errors));
             }
-            $productFamily = collect((object)$productFamily)->pluck('product_family');
+            $productFamily = collect((object)$productFamily)->pluck('product');
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
