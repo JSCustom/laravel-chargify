@@ -46,6 +46,20 @@ class ProductService
             if (isset($product->error)) {
                 throw new Exception($product->error);
             }
+            Product::create([
+                'product_id' => $product->product->id,
+                'product_family_id' => $product->product->product_family->id,
+                'name' => $product->product->name,
+                'handle' => $product->product->handle,
+                'description' => $product->product->description,
+                'accounting_code' => $product->product->accounting_code,
+                'require_credit_card' => $product->product->require_credit_card,
+                'price_in_cents' => $product->product->price_in_cents,
+                'interval' => $product->product->interval,
+                'interval_unit' => $product->product->interval_unit,
+                'auto_create_signup_page' => $request->auto_create_signup_page ?? true,
+                'tax_code' => $product->product->tax_code
+            ]);
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::CREATED,
