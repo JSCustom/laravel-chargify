@@ -135,6 +135,7 @@ class ProductService
             if (isset($product->errors)) {
                 throw new Exception(implode(' ', $product->errors));
             }
+            if (!$product) throw new Exception("Product with handle: `$handle` does not exist or is archived.");
             $product = collect((object)$product);
             return (object)[
                 'status' => true,
@@ -153,11 +154,18 @@ class ProductService
     public function listProduct(Request $request)
     {
         try {
+            $params = http_build_query($request->all(), '', '&');
+            $product = ChargifyHelper::get("/".Urls::PRODUCTS.".json?$params");
+            $product = json_decode($product);
+            if (isset($product->errors)) {
+                throw new Exception(implode(' ', $product->errors));
+            }
+            $product = collect((object)$product)->pluck('product');
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product list.',
-                'result' => null
+                'result' => $product
             ];
         } catch (Exception $e) {
             return (object)[

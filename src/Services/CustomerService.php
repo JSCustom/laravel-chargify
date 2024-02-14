@@ -17,7 +17,11 @@ class CustomerService
      * Create Customer
      * Reference: https://developers.maxio.com/docs/api-docs/18237bcfe5cbb-create-customer
      */
-    public function createCustomer(Request $request)
+    /**
+     * Update Customer
+     * Reference: https://developers.maxio.com/docs/api-docs/fbf442cd90401-update-customer
+     */
+    public function createOrUpdateCustomer(Request $request, int $id = NULL)
     {
         try {
             $request->validate([
@@ -41,7 +45,7 @@ class CustomerService
                     "address_2" => $request->address_2
                 ]
             ];
-            $customer = ChargifyHelper::post("/".Urls::CUSTOMERS.".json", $data);
+            $customer = !$id ? ChargifyHelper::post("/".Urls::CUSTOMERS.".json", $data) : ChargifyHelper::put("/".Urls::CUSTOMERS."/$id.json", $data);
             $customer = json_decode($customer);
             if (isset($customer->errors)) {
                 throw new Exception(implode(' ', $customer->errors));
@@ -49,7 +53,9 @@ class CustomerService
             if (isset($customer->error)) {
                 throw new Exception($customer->error);
             }
-            Customer::create([
+            Customer::updateOrCreate([
+                'customer_id' => $customer->customer->id
+            ], [
                 'customer_id' => $customer->customer->id,
                 'first_name' => $customer->customer->first_name,
                 'last_name' => $customer->customer->last_name,
@@ -65,8 +71,8 @@ class CustomerService
             ]);
             return (object)[
                 'status' => true,
-                'code' => HttpServiceProvider::CREATED,
-                'message' => 'Customer created.',
+                'code' => !$id ? HttpServiceProvider::CREATED : HttpServiceProvider::OK,
+                'message' => !$id ? 'Customer created.' : 'Customer updated.',
                 'result' => $customer->customer
             ];
         } catch (Exception $e) {
@@ -123,71 +129,6 @@ class CustomerService
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Customer details.',
                 'result' => $customer['customer']
-            ];
-        } catch (Exception $e) {
-            return (object)[
-                'status' => false,
-                'code' => HttpServiceProvider::BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-    }
-    /**
-     * Update Customer
-     * Reference: https://developers.maxio.com/docs/api-docs/fbf442cd90401-update-customer
-     */
-    public function updateCustomer(Request $request, int $id)
-    {
-        try {
-            $request->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required'
-            ]);
-            $data = [
-                "customer" => [
-                    "first_name" => $request->first_name,
-                    "last_name" => $request->last_name,
-                    "email" => $request->email,
-                    "zip" => $request->zip,
-                    "state" => $request->state,
-                    "reference" => $request->reference,
-                    "phone" => $request->phone,
-                    "organization" => $request->organization,
-                    "country" => $request->country,
-                    "city" => $request->city,
-                    "address" => $request->address,
-                    "address_2" => $request->address_2
-                ]
-            ];
-            $customer = ChargifyHelper::put("/".Urls::CUSTOMERS."/$id.json", $data);
-            $customer = json_decode($customer);
-            if (isset($customer->errors)) {
-                throw new Exception(implode(' ', $customer->errors));
-            }
-            if (isset($customer->error)) {
-                throw new Exception($customer->error);
-            }
-            Customer::where([
-                'customer_id' => $id
-            ])->update([
-                'first_name' => $customer->customer->first_name,
-                'last_name' => $customer->customer->last_name,
-                'organization' => $customer->customer->organization,
-                'email' => $customer->customer->email,
-                'address' => $customer->customer->address,
-                'address_2' => $customer->customer->address_2,
-                'city' => $customer->customer->city,
-                'state' => $customer->customer->state,
-                'zip' => $customer->customer->zip,
-                'country' => $customer->customer->country,
-                'phone' => $customer->customer->phone
-            ]);
-            return (object)[
-                'status' => true,
-                'code' => HttpServiceProvider::OK,
-                'message' => 'Customer updated.',
-                'result' => $customer->customer
             ];
         } catch (Exception $e) {
             return (object)[

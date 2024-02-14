@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     public function createCustomer(Request $request)
     {
-        $customer = $this->_customerService->createCustomer($request);
+        $customer = $this->_customerService->createOrUpdateCustomer($request);
         return response(['status' => $customer->status, 'code' => $customer->code, 'message' => $customer->message, 'result' => $customer->result ?? NULL], $customer->code);
     }
     public function listCustomer(Request $request)
@@ -19,7 +19,7 @@ class CustomerController extends Controller
     }
     public function updateCustomer(Request $request, int $id)
     {
-        $customer = $this->_customerService->updateCustomer($request, $id);
+        $customer = $this->_customerService->createOrUpdateCustomer($request, $id);
         return response(['status' => $customer->status, 'code' => $customer->code, 'message' => $customer->message, 'result' => $customer->result ?? NULL], $customer->code);
     }
     public function readCustomer(int $id)
