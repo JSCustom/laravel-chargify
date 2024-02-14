@@ -37,7 +37,7 @@ class ProductService
                     "tax_code" => $request->tax_code ?? null
                 ]
             ];
-            $product = ChargifyHelper::post("/" . Urls::PRODUCTS . ".json", $data);
+            $product = ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . "/$productFamilyID/" . Urls::PRODUCTS . ".json", $data);
             $product = json_decode($product);
             if (isset($product->errors)) {
                 throw new Exception(implode(' ', $product->errors));
