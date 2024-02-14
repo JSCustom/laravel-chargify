@@ -13,7 +13,7 @@ use Exception;
 
 class ProductService
 {
-    public function createProduct(Request $request)
+    public function createOrUpdateProduct(Request $request, int $id = NULL)
     {
         try {
             $request->validate([
@@ -38,7 +38,7 @@ class ProductService
                     "tax_code" => $request->tax_code ?? null
                 ]
             ];
-            $product = ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . "/$request->product_family_id/" . Urls::PRODUCTS . ".json", $data);
+            $product = !$id ? ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . "/$request->product_family_id/" . Urls::PRODUCTS . ".json", $data) : ChargifyHelper::put("/".Urls::PRODUCTS."/$id.json", $data);
             $product = json_decode($product);
             if (isset($product->errors)) {
                 throw new Exception(implode(' ', $product->errors));
@@ -46,7 +46,9 @@ class ProductService
             if (isset($product->error)) {
                 throw new Exception($product->error);
             }
-            Product::create([
+            Product::updateOrCreate([
+                'product_id' => $product->product->id
+            ], [
                 'product_id' => $product->product->id,
                 'product_family_id' => $product->product->product_family->id,
                 'name' => $product->product->name,
@@ -62,8 +64,8 @@ class ProductService
             ]);
             return (object)[
                 'status' => true,
-                'code' => HttpServiceProvider::CREATED,
-                'message' => 'Product created.',
+                'code' => !$id ? HttpServiceProvider::CREATED : HttpServiceProvider::OK,
+                'message' => !$id ? 'Product created.' : 'Product updated.',
                 'result' => $product->product
             ];
         } catch (Exception $e) {
@@ -88,23 +90,6 @@ class ProductService
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product details.',
                 'result' => $product['product']
-            ];
-        } catch (Exception $e) {
-            return (object)[
-                'status' => false,
-                'code' => HttpServiceProvider::BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-    }
-    public function updateProduct(Request $request, int $productID)
-    {
-        try {
-            return (object)[
-                'status' => true,
-                'code' => HttpServiceProvider::OK,
-                'message' => 'Product updated.',
-                'result' => null
             ];
         } catch (Exception $e) {
             return (object)[

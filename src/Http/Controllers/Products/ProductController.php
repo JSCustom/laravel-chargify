@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function createProduct(Request $request)
     {
-        $product = $this->_productService->createProduct($request);
+        $product = $this->_productService->createOrUpdateProduct($request);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
     public function readProduct(int $id)
@@ -17,9 +17,9 @@ class ProductController extends Controller
         $product = $this->_productService->readProduct($id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
-    public function updateProduct(Request $request, int $productID)
+    public function updateProduct(Request $request, int $id)
     {
-        $product = $this->_productService->updateProduct($request, $productID);
+        $product = $this->_productService->createOrUpdateProduct($request, $id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
     public function archiveProduct(int $productID)

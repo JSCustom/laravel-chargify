@@ -35,6 +35,7 @@ Route::group(['prefix' => 'chargify'], function() {
     });
     Route::group(['prefix' => 'product'], function() {
         Route::post('', [ProductController::class, 'createProduct']);
+        Route::put('{id}', [ProductController::class, 'updateProduct']);
         Route::get('{id}', [ProductController::class, 'readProduct']);
     });
     Route::group(['prefix' => 'subscription'], function() {
