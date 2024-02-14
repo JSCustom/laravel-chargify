@@ -34,7 +34,7 @@
 								},
 								{
 									"key": "organization",
-									"value": "",
+									"value": "Pool Company",
 									"type": "text"
 								},
 								{
@@ -64,12 +64,12 @@
 								},
 								{
 									"key": "phone",
-									"value": "",
+									"value": "9827181728",
 									"type": "text"
 								},
 								{
 									"key": "reference",
-									"value": "man",
+									"value": "",
 									"type": "text"
 								}
 							]
@@ -233,7 +233,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "75206568"
+									"value": "75444473"
 								}
 							]
 						}
@@ -247,7 +247,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"first_name\": \"Wade\",\n    \"last_name\": \"Wilson\",\n    \"email\": \"wade.wilson@example.com\",\n    \"organization\": null,\n    \"zip\": \"2003\",\n    \"state\": \"NSW\",\n    \"country\": \"AU\",\n    \"city\": \"Emerald\",\n    \"address\": \"29 Sweeney Street\",\n    \"phone\": null,\n    \"reference\": \"man\"\n}",
+							"raw": "{\n    \"first_name\": \"Wade\",\n    \"last_name\": \"Wilson\",\n    \"email\": \"wade.wilson@example.com\",\n    \"organization\": null,\n    \"zip\": \"2003\",\n    \"state\": \"NSW\",\n    \"country\": \"AU\",\n    \"city\": \"Emerald\",\n    \"address\": \"29 Sweeney Street\",\n    \"phone\": \"9827181728\",\n    \"reference\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -268,7 +268,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "75206214"
+									"value": "75444473"
 								}
 							]
 						}
@@ -298,7 +298,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "75206439"
+									"value": "75444473"
 								}
 							]
 						}
@@ -351,7 +351,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "75202514"
+									"value": "75444588"
 								}
 							]
 						}
@@ -373,22 +373,22 @@
 							"formdata": [
 								{
 									"key": "product_handle",
-									"value": "self-guided-12-2",
+									"value": "gold-plan",
 									"type": "text"
 								},
 								{
 									"key": "first_name",
-									"value": "Patrick",
+									"value": "Wade",
 									"type": "text"
 								},
 								{
 									"key": "last_name",
-									"value": "Brewer",
+									"value": "Wilson",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "patrick.brewer@example.com",
+									"value": "wade.wilson@example.com",
 									"type": "text"
 								},
 								{
@@ -479,7 +479,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"full_number\": \"4111111111111119\",\n    \"expiration_month\": \"11\",\n    \"expiration_year\": \"2030\"\n}",
+							"raw": "{\n    \"full_number\": \"4111111111111111\",\n    \"expiration_month\": \"11\",\n    \"expiration_year\": \"2030\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -500,7 +500,7 @@
 							"variable": [
 								{
 									"key": "subscriptionID",
-									"value": "72141360"
+									"value": "72324615"
 								}
 							]
 						}
@@ -526,7 +526,7 @@
 							"variable": [
 								{
 									"key": "subscriptionID",
-									"value": "72141360"
+									"value": "72324615"
 								}
 							]
 						}
@@ -649,6 +649,504 @@
 								{
 									"key": "per_page",
 									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Gold Plan",
+									"type": "text"
+								},
+								{
+									"key": "handle",
+									"value": "gold-plan",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is our gold plan.",
+									"type": "text"
+								},
+								{
+									"key": "accounting_code",
+									"value": "123",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "require_credit_card",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price_in_cents",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "interval",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "interval_unit",
+									"value": "month",
+									"type": "text"
+								},
+								{
+									"key": "product_family_id",
+									"value": "2620123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Gold Plan\",\n    \"handle\": \"gold-plan\",\n    \"description\": \"This is our gold plan.\",\n    \"price_in_cents\": 1000,\n    \"interval\": 1,\n    \"interval_unit\": \"month\",\n    \"product_family_id\": 2620123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6627130"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Archive Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6627130"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6627130"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product?page=1&per_page=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Product By Handle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product/handle/:handle",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product",
+								"handle",
+								":handle"
+							],
+							"variable": [
+								{
+									"key": "handle",
+									"value": "gold-plan"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Families",
+			"item": [
+				{
+					"name": "List Products for Product Family",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productHandle",
+									"value": "self-guided-12-2",
+									"type": "text"
+								},
+								{
+									"key": "customerFirstName",
+									"value": "Patrick",
+									"type": "text"
+								},
+								{
+									"key": "customerLastName",
+									"value": "Brewer",
+									"type": "text"
+								},
+								{
+									"key": "customerEmail",
+									"value": "patrick.brewer@example.com",
+									"type": "text"
+								},
+								{
+									"key": "customerZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "customerState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "customerCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "customerCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "customerAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								},
+								{
+									"key": "fullNumber",
+									"value": "4111111111111111",
+									"type": "text"
+								},
+								{
+									"key": "expirationMonth",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "expirationYear",
+									"value": "27",
+									"type": "text"
+								},
+								{
+									"key": "billingZip",
+									"value": "2003",
+									"type": "text"
+								},
+								{
+									"key": "billingState",
+									"value": "NSW",
+									"type": "text"
+								},
+								{
+									"key": "billingCountry",
+									"value": "AU",
+									"type": "text"
+								},
+								{
+									"key": "billingCity",
+									"value": "Emerald",
+									"type": "text"
+								},
+								{
+									"key": "billingAddress",
+									"value": "29 Sweeney Street",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family/:id/products?page=1&per_page=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family",
+								":id",
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2620123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product Family",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Sample Product Family 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is a sample product family description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Family",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sample Product Family 3\",\n    \"description\": \"This is a sample product family description 3.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2620123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Product Families",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Product Family",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2620123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Family",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/chargify/product-family/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"product-family",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2620124"
 								}
 							]
 						}
