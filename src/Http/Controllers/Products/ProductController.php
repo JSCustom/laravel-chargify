@@ -12,9 +12,9 @@ class ProductController extends Controller
         $product = $this->_productService->createProduct($request);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
-    public function readProduct(int $productID)
+    public function readProduct(int $id)
     {
-        $product = $this->_productService->readProduct($productID);
+        $product = $this->_productService->readProduct($id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
     public function updateProduct(Request $request, int $productID)

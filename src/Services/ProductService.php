@@ -74,14 +74,20 @@ class ProductService
             ];
         }
     }
-    public function readProduct(int $productID)
+    public function readProduct(int $id)
     {
         try {
+            $product = ChargifyHelper::get("/".Urls::PRODUCTS."/$id.json");
+            $product = json_decode($product);
+            if (isset($product->errors)) {
+                throw new Exception(implode(' ', $product->errors));
+            }
+            $product = collect((object)$product);
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product details.',
-                'result' => null
+                'result' => $product['product']
             ];
         } catch (Exception $e) {
             return (object)[
