@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use JSCustom\Chargify\Http\Controllers\{
-    Customs\CustomController,
     Customers\CustomerController,
     ProductFamilies\ProductFamilyController,
     Products\ProductController,
@@ -47,12 +46,6 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::get('', [SubscriptionController::class, 'listSubscription']);
         Route::put('{subscriptionID}', [SubscriptionController::class, 'updateSubscription']);
         Route::get('{subscriptionID}', [SubscriptionController::class, 'readSubscription']);
-    });
-    Route::group(['prefix' => 'custom'], function() {
-        Route::post('[/{url}]', [CustomController::class, 'post']);
-        Route::get('[/{url}]', [CustomController::class, 'get']);
-        Route::put('[/{url}]', [CustomController::class, 'put']);
-        Route::delete('[/{url}]', [CustomController::class, 'delete']);
     });
 });
 ?>
