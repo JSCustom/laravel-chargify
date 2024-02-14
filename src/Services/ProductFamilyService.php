@@ -43,7 +43,7 @@ class ProductFamilyService
             ]);
             return (object)[
                 'status' => true,
-                'code' => HttpServiceProvider::OK,
+                'code' => HttpServiceProvider::CREATED,
                 'message' => 'Product family created.',
                 'result' => $productFamily->product_family
             ];
