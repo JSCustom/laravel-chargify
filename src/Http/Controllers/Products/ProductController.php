@@ -22,9 +22,9 @@ class ProductController extends Controller
         $product = $this->_productService->createOrUpdateProduct($request, $id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
-    public function archiveProduct(int $productID)
+    public function deleteProduct(int $id)
     {
-        $product = $this->_productService->archiveProduct($productID);
+        $product = $this->_productService->deleteProduct($id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
     public function readProductByHandle(String $handle)

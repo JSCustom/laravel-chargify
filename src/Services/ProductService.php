@@ -99,14 +99,25 @@ class ProductService
             ];
         }
     }
-    public function archiveProduct(int $productID)
+    public function deleteProduct(int $id)
     {
         try {
+            $product = ChargifyHelper::delete("/".Urls::PRODUCTS."/$id.json");
+            $product = json_decode($product);
+            if (isset($product->errors)) {
+                throw new Exception(implode(' ', $product->errors));
+            }
+            if (isset($product->error)) {
+                throw new Exception($product->error);
+            }
+            Product::where([
+                'product_id' => $id
+            ])->delete();
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
-                'message' => 'Product archived.',
-                'result' => null
+                'message' => 'Product deleted.',
+                'result' => $product
             ];
         } catch (Exception $e) {
             return (object)[
