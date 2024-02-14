@@ -9,7 +9,7 @@ class ProductFamilyController extends Controller
 {
     public function createProductFamily(Request $request)
     {
-        $productFamily = $this->_productFamilyService->createProductFamily($request);
+        $productFamily = $this->_productFamilyService->createOrUpdateProductFamily($request);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
     public function readProductFamily(int $id)
@@ -19,7 +19,7 @@ class ProductFamilyController extends Controller
     }
     public function updateProductFamily(Request $request, int $id)
     {
-        $productFamily = $this->_productFamilyService->updateProductFamily($request, $id);
+        $productFamily = $this->_productFamilyService->createOrUpdateProductFamily($request, $id);
         return response(['status' => $productFamily->status, 'code' => $productFamily->code, 'message' => $productFamily->message, 'result' => $productFamily->result ?? NULL], $productFamily->code);
     }
     public function listProductFamily(Request $request)

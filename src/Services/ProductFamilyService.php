@@ -13,7 +13,7 @@ use Exception;
 
 class ProductFamilyService
 {
-    public function createProductFamily(Request $request)
+    public function createOrUpdateProductFamily(Request $request, int $id = NULL)
     {
         try {
             $request->validate([
@@ -23,10 +23,12 @@ class ProductFamilyService
             $data = [
                 "product_family" => [
                     "name" => $request->name,
-                    "description" => $request->description
+                    "description" => $request->description,
+                    "handle" => $request->handle ?? null,
+                    "accounting_code" => $request->accounting_code ?? null
                 ]
             ];
-            $productFamily = ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . ".json", $data);
+            $productFamily = !$id ? ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . ".json", $data) : ChargifyHelper::put("/".Urls::PRODUCT_FAMILIES."/$id.json", $data);
             $productFamily = json_decode($productFamily);
             if (isset($productFamily->errors)) {
                 throw new Exception(implode(' ', $productFamily->errors));
@@ -34,7 +36,9 @@ class ProductFamilyService
             if (isset($productFamily->error)) {
                 throw new Exception($productFamily->error);
             }
-            ProductFamily::create([
+            ProductFamily::updateOrCreate([
+                'product_family_id' => $productFamily->product_family->id
+            ], [
                 'product_family_id' => $productFamily->product_family->id,
                 'name' => $productFamily->product_family->name,
                 'description' => $productFamily->product_family->description,
@@ -43,8 +47,8 @@ class ProductFamilyService
             ]);
             return (object)[
                 'status' => true,
-                'code' => HttpServiceProvider::CREATED,
-                'message' => 'Product family created.',
+                'code' => !$id ? HttpServiceProvider::CREATED : HttpServiceProvider::OK,
+                'message' => !$id ? 'Product family created.' : 'Product family updated.',
                 'result' => $productFamily->product_family
             ];
         } catch (Exception $e) {
@@ -72,49 +76,6 @@ class ProductFamilyService
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product family details.',
                 'result' => $productFamily['product_family']
-            ];
-        } catch (Exception $e) {
-            return (object)[
-                'status' => false,
-                'code' => HttpServiceProvider::BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-    }
-    public function updateProductFamily(Request $request, int $id)
-    {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required'
-            ]);
-            $data = [
-                "product_family" => [
-                    "name" => $request->name,
-                    "description" => $request->description
-                ]
-            ];
-            $productFamily = ChargifyHelper::put("/".Urls::PRODUCT_FAMILIES."/$id.json", $data);
-            $productFamily = json_decode($productFamily);
-            if (isset($productFamily->errors)) {
-                throw new Exception(implode(' ', $productFamily->errors));
-            }
-            if (isset($productFamily->error)) {
-                throw new Exception($productFamily->error);
-            }
-            ProductFamily::where([
-                'product_family_id' => $id
-            ])->update([
-                'name' => $productFamily->product_family->name,
-                'description' => $productFamily->product_family->description,
-                'handle' => $productFamily->product_family->handle,
-                'accounting_code' => $productFamily->product_family->accounting_code
-            ]);
-            return (object)[
-                'status' => true,
-                'code' => HttpServiceProvider::OK,
-                'message' => 'Product family updated.',
-                'result' => $productFamily->product_family
             ];
         } catch (Exception $e) {
             return (object)[
