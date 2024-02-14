@@ -187,7 +187,7 @@ class CustomerService
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
-                'message' => 'Customer details.',
+                'message' => 'Customer details by reference.',
                 'result' => $customer['customer']
             ];
         } catch (Exception $e) {
