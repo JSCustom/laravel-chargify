@@ -26,7 +26,7 @@ class CreateChargifyProductsTable extends Migration
             $table->integer('interval')->default(1);
             $table->char('interval_unit', 50)->default('month');
             $table->boolean('auto_create_signup_page')->default(true);
-            $table->text('tax_code');
+            $table->text('tax_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
