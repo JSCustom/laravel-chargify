@@ -40,6 +40,7 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::get('handle/{handle}', [ProductController::class, 'readProductByHandle']);
         Route::get('{id}', [ProductController::class, 'readProduct']);
         Route::delete('{id}', [ProductController::class, 'archiveProduct']);
+        Route::post('{id}/unarchive', [ProductController::class, 'unarchiveProduct']);
     });
     Route::group(['prefix' => 'subscription'], function() {
         Route::post('', [SubscriptionController::class, 'createSubscription']);

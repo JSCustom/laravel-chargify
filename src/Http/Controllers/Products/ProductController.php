@@ -27,6 +27,11 @@ class ProductController extends Controller
         $product = $this->_productService->archiveProduct($id);
         return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
     }
+    public function unarchiveProduct(Request $request, int $id)
+    {
+        $product = $this->_productService->unarchiveProduct($request, $id);
+        return response(['status' => $product->status, 'code' => $product->code, 'message' => $product->message, 'result' => $product->result ?? NULL], $product->code);
+    }
     public function readProductByHandle(String $handle)
     {
         $product = $this->_productService->readProductByHandle($handle);
