@@ -2,11 +2,11 @@
 use Illuminate\Support\Facades\Route;
 use JSCustom\Chargify\Http\Controllers\{
     Customers\CustomerController,
-    ProductPricePoint\ProductPricePointController,
+    ProductFamilies\ProductFamilyController,
+    Products\ProductController,
     Subscriptions\SubscriptionController,
     Sync\SyncController
 };
-use JSCustom\Chargify\Http\Controllers\ProductFamilies\ProductFamilyController;
 
 Route::group(['prefix' => 'chargify'], function() {
     Route::group(['prefix' => 'sync'], function() {
@@ -33,8 +33,8 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::delete('{id}', [ProductFamilyController::class, 'deleteProductFamily']);
         Route::get('{id}/products', [ProductFamilyController::class, 'listProductsForProductFamily']);
     });
-    Route::group(['prefix' => 'products'], function() {
-
+    Route::group(['prefix' => 'product'], function() {
+        Route::post('', [ProductController::class, 'createProduct']);
     });
     Route::group(['prefix' => 'subscription'], function() {
         Route::post('', [SubscriptionController::class, 'createSubscription']);

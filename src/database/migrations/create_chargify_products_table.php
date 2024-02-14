@@ -19,13 +19,13 @@ class CreateChargifyProductsTable extends Migration
             $table->char('name', 100);
             $table->char('handle', 100);
             $table->text('description');
-            $table->text('accounting_code');
+            $table->text('accounting_code')->nullable();
             $table->boolean('require_credit_card')->default(true);
             $table->integer('price_in_cents');
             $table->integer('interval')->default(1);
-            $table->char('interval_unit', 100);
+            $table->char('interval_unit', 50)->default('month');
             $table->boolean('auto_create_signup_page')->default(true);
-            $table->char('tax_code', 100);
+            $table->text('tax_code');
             $table->timestamps();
             $table->softDeletes();
         });

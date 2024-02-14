@@ -18,11 +18,13 @@ class Product extends Model
         'name',
         'handle',
         'description',
+        'accounting_code',
+        'require_credit_card',
+        'price_in_cents',
         'interval',
         'interval_unit',
-        'tax_code',
-        'default_product_price_point_id',
-        'product_price_point_id'
+        'auto_create_signup_page',
+        'tax_code'
     ];
 
     protected $casts = [
@@ -31,10 +33,12 @@ class Product extends Model
         'name' => 'string',
         'handle' => 'string',
         'description' => 'string',
+        'accounting_code' => 'string',
+        'require_credit_card' => 'boolean',
+        'price_in_cents' => 'integer',
         'interval' => 'integer',
         'interval_unit' => 'string',
-        'tax_code' => 'string',
-        'default_product_price_point_id' => 'integer',
-        'product_price_point_id' => 'integer'
+        'auto_create_signup_page' => 'boolean',
+        'tax_code' => 'string'
     ];
 }
