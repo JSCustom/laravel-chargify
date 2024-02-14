@@ -138,7 +138,7 @@ class ProductService
                     "handle" => $request->handle
                 ]
             ];
-            $product = ChargifyHelper::post("/" . Urls::PRODUCTS . "/$id/unarchive.json", $data);
+            $product = ChargifyHelper::post("/" . Urls::PRODUCTS . "/$id/undestroy.json", $data);
             $product = json_decode($product);
             if (isset($product->errors)) {
                 throw new Exception(implode(' ', $product->errors));
