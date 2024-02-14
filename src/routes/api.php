@@ -36,8 +36,9 @@ Route::group(['prefix' => 'chargify'], function() {
     Route::group(['prefix' => 'product'], function() {
         Route::post('', [ProductController::class, 'createProduct']);
         Route::put('{id}', [ProductController::class, 'updateProduct']);
+        Route::get('handle/{handle}', [ProductController::class, 'readProductByHandle']);
         Route::get('{id}', [ProductController::class, 'readProduct']);
-        Route::delete('{id}', [ProductController::class, 'deleteProduct']);
+        Route::delete('{id}', [ProductController::class, 'archiveProduct']);
     });
     Route::group(['prefix' => 'subscription'], function() {
         Route::post('', [SubscriptionController::class, 'createSubscription']);

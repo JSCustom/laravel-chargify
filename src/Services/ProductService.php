@@ -99,7 +99,7 @@ class ProductService
             ];
         }
     }
-    public function deleteProduct(int $id)
+    public function archiveProduct(int $id)
     {
         try {
             $product = ChargifyHelper::delete("/".Urls::PRODUCTS."/$id.json");
@@ -116,8 +116,8 @@ class ProductService
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
-                'message' => 'Product deleted.',
-                'result' => $product
+                'message' => 'Product archived.',
+                'result' => $product->product
             ];
         } catch (Exception $e) {
             return (object)[
@@ -130,11 +130,17 @@ class ProductService
     public function readProductByHandle(String $handle)
     {
         try {
+            $product = ChargifyHelper::get("/".Urls::PRODUCTS."/handle/$handle.json");
+            $product = json_decode($product);
+            if (isset($product->errors)) {
+                throw new Exception(implode(' ', $product->errors));
+            }
+            $product = collect((object)$product);
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Product details by handle.',
-                'result' => null
+                'result' => $product['product']
             ];
         } catch (Exception $e) {
             return (object)[
