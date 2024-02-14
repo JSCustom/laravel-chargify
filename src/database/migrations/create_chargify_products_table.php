@@ -16,6 +16,7 @@ class CreateChargifyProductsTable extends Migration
         Schema::create('chargify_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_family_id');
             $table->char('name', 100);
             $table->char('handle', 100);
             $table->text('description');

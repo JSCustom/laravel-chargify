@@ -15,6 +15,7 @@ class Product extends Model
 
     protected $fillable = [
         'product_id',
+        'product_family_id',
         'name',
         'handle',
         'description',
@@ -29,6 +30,7 @@ class Product extends Model
 
     protected $casts = [
         'id' => 'integer',
+        'product_family_id' => 'integer',
         'product_id' => 'integer',
         'name' => 'string',
         'handle' => 'string',

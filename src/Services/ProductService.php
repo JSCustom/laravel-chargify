@@ -13,10 +13,11 @@ use Exception;
 
 class ProductService
 {
-    public function createProduct(Request $request, int $productFamilyID)
+    public function createProduct(Request $request)
     {
         try {
             $request->validate([
+                'product_family_id' => 'required',
                 'name' => 'required',
                 'description' => 'required',
                 'price_in_cents' => 'required',
@@ -37,7 +38,7 @@ class ProductService
                     "tax_code" => $request->tax_code ?? null
                 ]
             ];
-            $product = ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . "/$productFamilyID/" . Urls::PRODUCTS . ".json", $data);
+            $product = ChargifyHelper::post("/" . Urls::PRODUCT_FAMILIES . "/$request->product_family_id/" . Urls::PRODUCTS . ".json", $data);
             $product = json_decode($product);
             if (isset($product->errors)) {
                 throw new Exception(implode(' ', $product->errors));
