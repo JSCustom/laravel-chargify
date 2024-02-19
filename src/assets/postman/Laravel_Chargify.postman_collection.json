@@ -1154,6 +1154,97 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "List Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/invoice?customer_ids=[75444588]&page=1&per_page=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"invoice"
+							],
+							"query": [
+								{
+									"key": "customer_ids",
+									"value": "[75444588]"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/invoice/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"invoice",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "inv_bch7yvvk3zwrd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chargify/invoice/:id/download",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chargify",
+								"invoice",
+								":id",
+								"download"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "inv_bch7yvvk3zwrd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
