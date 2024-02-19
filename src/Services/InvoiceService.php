@@ -34,7 +34,7 @@ class InvoiceService
             ];
         }
     }
-    public function readInvoice(int $id)
+    public function readInvoice(String $id)
     {
         try {
             $invoice = ChargifyHelper::get("/" . Urls::INVOICES . "/$id.json");

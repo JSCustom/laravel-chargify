@@ -12,7 +12,7 @@ class InvoiceController extends Controller
         $invoice = $this->_invoiceService->listInvoice($request);
         return response(['status' => $invoice->status, 'code' => $invoice->code, 'message' => $invoice->message, 'result' => $invoice->result ?? NULL], $invoice->code);
     }
-    public function readInvoice(int $id)
+    public function readInvoice(String $id)
     {
         $invoice = $this->_invoiceService->readInvoice($id);
         return response(['status' => $invoice->status, 'code' => $invoice->code, 'message' => $invoice->message, 'result' => $invoice->result ?? NULL], $invoice->code);
