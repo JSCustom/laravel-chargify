@@ -26,6 +26,7 @@ Route::group(['prefix' => 'chargify'], function() {
     Route::group(['prefix' => 'invoice'], function() {
         Route::get('', [InvoiceController::class, 'listInvoice']);
         Route::get('{id}', [InvoiceController::class, 'readInvoice']);
+        Route::get('{id}/download', [InvoiceController::class, 'downloadInvoice']);
     });
     Route::group(['prefix' => 'product-family'], function() {
         Route::post('', [ProductFamilyController::class, 'createProductFamily']);

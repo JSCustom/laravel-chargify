@@ -17,4 +17,9 @@ class InvoiceController extends Controller
         $invoice = $this->_invoiceService->readInvoice($id);
         return response(['status' => $invoice->status, 'code' => $invoice->code, 'message' => $invoice->message, 'result' => $invoice->result ?? NULL], $invoice->code);
     }
+    public function downloadInvoice(String $id)
+    {
+        $invoice = $this->_invoiceService->readInvoice($id, true);
+        return response(['status' => $invoice->status, 'code' => $invoice->code, 'message' => $invoice->message, 'result' => $invoice->result ?? NULL], $invoice->code);
+    }
 }

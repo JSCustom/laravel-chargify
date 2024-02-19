@@ -34,7 +34,7 @@ class InvoiceService
             ];
         }
     }
-    public function readInvoice(String $id)
+    public function readInvoice(String $id, bool $isDownload = false)
     {
         try {
             $invoice = ChargifyHelper::get("/" . Urls::INVOICES . "/$id.json");
@@ -49,8 +49,8 @@ class InvoiceService
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
-                'message' => 'Invoice details.',
-                'result' => $invoice
+                'message' => !$isDownload ? 'Invoice details.' : 'Invoice download.',
+                'result' => !$isDownload ? $invoice : $invoice['public_url']
             ];
         } catch (Exception $e) {
             return (object)[
