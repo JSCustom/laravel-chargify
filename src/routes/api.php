@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use JSCustom\Chargify\Http\Controllers\{
     Customers\CustomerController,
+    Invoices\InvoiceController,
     ProductFamilies\ProductFamilyController,
     Products\ProductController,
     Subscriptions\SubscriptionController,
@@ -23,7 +24,7 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::get('{id}/subscriptions', [CustomerController::class, 'listCustomerSubscription']);
     });
     Route::group(['prefix' => 'invoices'], function() {
-
+        Route::get('', [InvoiceController::class, 'listInvoice']);
     });
     Route::group(['prefix' => 'product-family'], function() {
         Route::post('', [ProductFamilyController::class, 'createProductFamily']);
