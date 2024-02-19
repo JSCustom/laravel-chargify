@@ -23,8 +23,9 @@ Route::group(['prefix' => 'chargify'], function() {
         Route::delete('{id}', [CustomerController::class, 'deleteCustomer']);
         Route::get('{id}/subscriptions', [CustomerController::class, 'listCustomerSubscription']);
     });
-    Route::group(['prefix' => 'invoices'], function() {
+    Route::group(['prefix' => 'invoice'], function() {
         Route::get('', [InvoiceController::class, 'listInvoice']);
+        Route::get('{id}', [InvoiceController::class, 'readInvoice']);
     });
     Route::group(['prefix' => 'product-family'], function() {
         Route::post('', [ProductFamilyController::class, 'createProductFamily']);
