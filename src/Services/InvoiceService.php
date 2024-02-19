@@ -24,7 +24,7 @@ class InvoiceService
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
                 'message' => 'Invoice list.',
-                'result' => $invoice
+                'result' => $invoice['invoices']
             ];
         } catch (Exception $e) {
             return (object)[
