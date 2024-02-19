@@ -19,7 +19,7 @@ class InvoiceService
             if (isset($invoice->errors)) {
                 throw new Exception(implode(' ', $invoice->errors));
             }
-            $invoice = collect((object)$invoice)->pluck('invoice');
+            $invoice = collect((object)$invoice);
             return (object)[
                 'status' => true,
                 'code' => HttpServiceProvider::OK,
